@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Student Registration Form</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-gray-100 py-10">
+        <div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-8">
+            <h1 class="text-2xl font-bold text-center mb-6">STUDENT REGISTRATION
+                FORM</h1>
+            <form>
+                <!-- Name Fields -->
+                <div class="grid grid-rows-3 gap-4 mb-4">
+                    <div>
+                        <label class="block font-medium mb-1">First Name</label>
+                        <input type="text" placeholder="(max 30 characters)"
+                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">Middle
+                            Name</label>
+                        <input type="text" placeholder="(max 30 characters)"
+                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">Last Name</label>
+                        <input type="text" placeholder="(max 30 characters)"
+                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300">
+                    </div>
+                </div>
+
+                <!-- Date of Birth -->
+                <div class="mb-4">
+                    <label class="block font-medium mb-1">Date of Birth</label>
+                    <input type="date" placeholder="DOB"
+                        class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300">
+                </div>
+
+                <!-- Email & Mobile -->
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block font-medium mb-1">Email ID</label>
+                        <input type="email"
+                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">Mobile
+                            Number</label>
+                        <input type="text" placeholder="10 digit number"
+                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300">
+                    </div>
+                </div>
+
+                <!-- Gender -->
+                <div class="mb-4">
+                    <label class="block font-medium mb-1">Gender</label>
+                    <div class="flex items-center gap-4">
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="gender"
+                                class="focus:ring-blue-300">
+                            Male
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="gender"
+                                class="focus:ring-blue-300">
+                            Female
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="mb-4">
+                    <label class="block font-medium mb-1">Address</label>
+                    <textarea
+                        class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"></textarea>
+                </div>
+
+                <!-- City, PIN, State, Country -->
+                <div class="grid grid-cols-4 gap-4 mb-4">
+                    <div>
+                        <label class="block font-medium mb-1">City</label>
+                        <input type="text" placeholder="(max 30 characters)"
+                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">PIN Code</label>
+                        <input type="text" placeholder="6 digit number"
+                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">State</label>
+                        <input type="text" placeholder="(max 30 characters)"
+                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">Country</label>
+                        <input type="text" value="India" readonly
+                            class="w-full px-3 py-2 border border-gray-300 bg-gray-100 rounded focus:outline-none">
+                    </div>
+                </div>
+
+                <!-- Hobbies -->
+                <div class="mb-4">
+                    <label class="block font-medium mb-1">Hobbies</label>
+                    <div class="flex gap-4">
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" class="focus:ring-blue-300">
+                            Coding
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" class="focus:ring-blue-300">
+                            Blog-Writing
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" class="focus:ring-blue-300">
+                            Hacking
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" class="focus:ring-blue-300">
+                            Cricket
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" class="focus:ring-blue-300">
+                            Others
+                        </label>
+                        <input type="text"
+                            class="px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300">
+                    </div>
+                </div>
+
+                <!-- Qualifications -->
+                <div class="mb-6">
+                    <label class="block font-medium mb-1">Qualification</label>
+                    <table class="w-full border border-gray-300">
+                        <thead>
+                            <tr>
+                                <th class="border px-4 py-2">Sl.No</th>
+                                <th class="border px-4 py-2">Examination</th>
+                                <th class="border px-4 py-2">Board</th>
+                                <th class="border px-4 py-2">Percentage</th>
+                                <th class="border px-4 py-2">Year of
+                                    Passing</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border px-4 py-2">1</td>
+                                <td class="border px-4 py-2">Class X</td>
+                                <td class="border px-4 py-2"><input type="text"
+                                        class="w-full"></td>
+                                <td class="border px-4 py-2"><input type="text"
+                                        class="w-full"></td>
+                                <td class="border px-4 py-2"><input type="text"
+                                        class="w-full"></td>
+                            </tr>
+                            <tr>
+                                <td class="border px-4 py-2">2</td>
+                                <td class="border px-4 py-2">Class XII</td>
+                                <td class="border px-4 py-2"><input type="text"
+                                        class="w-full"></td>
+                                <td class="border px-4 py-2"><input type="text"
+                                        class="w-full"></td>
+                                <td class="border px-4 py-2"><input type="text"
+                                        class="w-full"></td>
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Courses Applied For -->
+                <div class="mb-6">
+                    <label class="block font-medium mb-1">Courses Applied
+                        For</label>
+                    <div class="flex items-center gap-4">
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="course"
+                                class="focus:ring-blue-300">
+                            B.Tech
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="course"
+                                class="focus:ring-blue-300">
+                            M.Tech
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="course"
+                                class="focus:ring-blue-300">
+                            PhD
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input type="radio" name="course"
+                                class="focus:ring-blue-300">
+                            MS
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit and Reset -->
+                <div class="flex justify-center gap-4">
+                    <button type="submit"
+                        class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Submit</button>
+                    <button type="reset"
+                        class="px-6 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">Reset</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
