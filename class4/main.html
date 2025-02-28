@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Video Background Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        fadeIn: "fadeIn 2s ease-in-out",
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            "0%": { opacity: "0", transform: "translateY(10px)" },
+                            "100%": { opacity: "1", transform: "translateY(0)" }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="flex items-center justify-center min-h-screen text-white">
+    <!-- Video Background -->
+    <div class="absolute inset-0 w-full h-full overflow-hidden -z-10">
+        <video autoplay muted loop class="w-full h-full object-cover">
+            <source src="244754_small.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-black/50 -z-10"></div>
+
+    <!-- Main Content -->
+    <div class="relative z-10 flex flex-col items-center text-center px-6 animate-fadeIn">
+        <h1 class="text-6xl font-extrabold mb-4">Welcome to My Site</h1>
+        <p class="text-lg max-w-2xl mb-6 opacity-90">
+            This is a beautifully styled video background page with a dark overlay for better readability.
+        </p>
+        <button class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-600 transition-all"
+            onclick="toggleVideo()">
+            Play/Pause Video
+        </button>
+    </div>
+
+    <script>
+        function toggleVideo() {
+            const video = document.querySelector('video');
+            video.paused ? video.play() : video.pause();
+        }
+    </script>
+</body>
+
+</html>
