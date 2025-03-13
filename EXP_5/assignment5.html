@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Registration Form</title>
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    .form-appear {
+      animation: fadeUp 0.6s ease-out forwards;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .error-message {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .error-message.show {
+      max-height: 50px;
+    }
+
+    .input-field {
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .input-field:focus {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    }
+
+    .success-checkmark {
+      display: none;
+    }
+
+    .input-field.valid + .success-checkmark {
+      display: block;
+    }
+
+    .gradient-background {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+  </style>
+</head>
+<body class="gradient-background min-h-screen flex items-center justify-center p-4">
+  <div class="form-appear bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 relative overflow-hidden">
+    <div class="absolute -top-32 -right-32 w-64 h-64 bg-indigo-100 rounded-full"></div>
+    <div class="absolute -bottom-32 -left-32 w-64 h-64 bg-purple-100 rounded-full"></div>
+
+    <div class="relative">
+      <h2 class="text-3xl font-bold text-gray-800 mb-2">Join Us</h2>
+      <p class="text-gray-600 mb-8">Create your account and start your journey</p>
+
+      <form id="registrationForm" class="space-y-6">
+        <div class="relative">
+          <label for="firstName" class="text-sm font-medium text-gray-700 block mb-1">First Name</label>
+          <div class="relative">
+            <input type="text" id="firstName" name="firstName" class="input-field w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none" placeholder="John">
+            <span class="success-checkmark absolute right-3 top-3 text-green-500">
+              <i class="fas fa-check-circle"></i>
+            </span>
+          </div>
+          <div class="error-message text-red-500 text-sm mt-1" id="firstNameError">
+            <i class="fas fa-exclamation-circle mr-1"></i>
+            <span>First name is required</span>
+          </div>
+        </div>
+
+        <div class="relative">
+          <label for="lastName" class="text-sm font-medium text-gray-700 block mb-1">Last Name</label>
+          <div class="relative">
+            <input type="text" id="lastName" name="lastName" class="input-field w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none" placeholder="Doe">
+            <span class="success-checkmark absolute right-3 top-3 text-green-500">
+              <i class="fas fa-check-circle"></i>
+            </span>
+          </div>
+          <div class="error-message text-red-500 text-sm mt-1" id="lastNameError">
+            <i class="fas fa-exclamation-circle mr-1"></i>
+            <span>Last name is required</span>
+          </div>
+        </div>
+
+        <div class="relative">
+          <label for="email" class="text-sm font-medium text-gray-700 block mb-1">Email Address</label>
+          <div class="relative">
+            <input type="email" id="email" name="email" class="input-field w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none" placeholder="john.doe@example.com">
+            <span class="success-checkmark absolute right-3 top-3 text-green-500">
+              <i class="fas fa-check-circle"></i>
+            </span>
+          </div>
+          <div class="error-message text-red-500 text-sm mt-1" id="emailError">
+            <i class="fas fa-exclamation-circle mr-1"></i>
+            <span>Please enter a valid email address</span>
+          </div>
+        </div>
+
+        <div class="relative">
+          <label for="password" class="text-sm font-medium text-gray-700 block mb-1">Password</label>
+          <div class="relative">
+            <input type="password" id="password" name="password" class="input-field w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none" placeholder="••••••••">
+            <span class="success-checkmark absolute right-3 top-3 text-green-500">
+              <i class="fas fa-check-circle"></i>
+            </span>
+            <button type="button" id="togglePassword" class="absolute right-3 top-3 text-gray-500 hover:text-gray-700">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+          <div class="error-message text-red-500 text-sm mt-1" id="passwordError">
+            <i class="fas fa-exclamation-circle mr-1"></i>
+            <span>Password must be at least 8 characters</span>
+          </div>
+
+          <div class="password-strength mt-2 hidden" id="passwordStrength">
+            <div class="h-1 w-full bg-gray-200 rounded-full overflow-hidden">
+              <div id="strengthBar" class="h-full w-0 bg-red-500 transition-all duration-300"></div>
+            </div>
+            <div class="flex justify-between text-xs text-gray-500 mt-1">
+              <span>Weak</span>
+              <span>Medium</span>
+              <span>Strong</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" id="submitBtn" class="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 text-white font-medium rounded-lg transition-all duration-300 flex items-center justify-center">
+            <span class="mr-2">Create Account</span>
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </form>
+
+      <div class="text-center mt-6">
+        <p class="text-sm text-gray-600">
+          Already have an account?
+          <a href="#" class="text-indigo-600 font-medium hover:text-indigo-500">Sign in</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full transform transition-all duration-300 scale-95">
+      <div class="text-center">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-check text-2xl text-green-500"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Registration Successful!</h3>
+        <p class="text-gray-600 mb-6">Your account has been created successfully.</p>
+        <button id="closeModal" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
+          Continue
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('registrationForm');
+      const firstNameInput = document.getElementById('firstName');
+      const lastNameInput = document.getElementById('lastName');
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const togglePasswordBtn = document.getElementById('togglePassword');
+      const successModal = document.getElementById('successModal');
+      const closeModalBtn = document.getElementById('closeModal');
+      const passwordStrength = document.getElementById('passwordStrength');
+      const strengthBar = document.getElementById('strengthBar');
+
+      // Show/hide error message
+      function showError(inputElement, errorId, show) {
+        const errorElement = document.getElementById(errorId);
+        if (show) {
+          errorElement.classList.add('show');
+          inputElement.classList.add('border-red-500');
+          inputElement.classList.remove('valid');
+        } else {
+          errorElement.classList.remove('show');
+          inputElement.classList.remove('border-red-500');
+          if (inputElement.value.trim() !== '') {
+            inputElement.classList.add('valid');
+          } else {
+            inputElement.classList.remove('valid');
+          }
+        }
+      }
+
+      // Validate first name
+      function validateFirstName() {
+        const value = firstNameInput.value.trim();
+        const isValid = value !== '';
+        showError(firstNameInput, 'firstNameError', !isValid);
+        return isValid;
+      }
+
+      // Validate last name
+      function validateLastName() {
+        const value = lastNameInput.value.trim();
+        const isValid = value !== '';
+        showError(lastNameInput, 'lastNameError', !isValid);
+        return isValid;
+      }
+
+      // Validate email
+      function validateEmail() {
+        const value = emailInput.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const isValid = emailRegex.test(value);
+        showError(emailInput, 'emailError', !isValid);
+        return isValid;
+      }
+
+      // Validate password
+      function validatePassword() {
+        const value = passwordInput.value;
+        const isValid = value.length >= 8;
+        showError(passwordInput, 'passwordError', !isValid);
+
+        // Update password strength indicator
+        if (value.length > 0) {
+          passwordStrength.classList.remove('hidden');
+          let strength = 0;
+
+          // Length check
+          if (value.length >= 8) strength += 1;
+
+          // Complexity checks
+          if (/[A-Z]/.test(value)) strength += 1;
+          if (/[0-9]/.test(value)) strength += 1;
+          if (/[^A-Za-z0-9]/.test(value)) strength += 1;
+
+          // Update strength bar
+          const percent = (strength / 4) * 100;
+          strengthBar.style.width = `${percent}%`;
+
+          if (percent <= 25) {
+            strengthBar.className = 'h-full bg-red-500 transition-all duration-300';
+          } else if (percent <= 50) {
+            strengthBar.className = 'h-full bg-orange-500 transition-all duration-300';
+          } else if (percent <= 75) {
+            strengthBar.className = 'h-full bg-yellow-500 transition-all duration-300';
+          } else {
+            strengthBar.className = 'h-full bg-green-500 transition-all duration-300';
+          }
+        } else {
+          passwordStrength.classList.add('hidden');
+        }
+
+        return isValid;
+      }
+
+      // Add input event listeners
+      firstNameInput.addEventListener('input', validateFirstName);
+      lastNameInput.addEventListener('input', validateLastName);
+      emailInput.addEventListener('input', validateEmail);
+      passwordInput.addEventListener('input', validatePassword);
+
+      // Toggle password visibility
+      togglePasswordBtn.addEventListener('click', function() {
+        const type = passwordInput.type === 'password' ? 'text' : 'password';
+        passwordInput.type = type;
+        togglePasswordBtn.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+      });
+
+      // Form submission
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Validate all fields
+        const isFirstNameValid = validateFirstName();
+        const isLastNameValid = validateLastName();
+        const isEmailValid = validateEmail();
+        const isPasswordValid = validatePassword();
+
+        // Check if form is valid
+        if (isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid) {
+          // Show success animation on button
+          const submitBtn = document.getElementById('submitBtn');
+          submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processing...';
+          submitBtn.disabled = true;
+
+          // Simulate form submission delay
+          setTimeout(() => {
+            // Show success modal
+            successModal.classList.remove('hidden');
+            successModal.querySelector('div').classList.remove('scale-95');
+            successModal.querySelector('div').classList.add('scale-100');
+
+            // Reset form
+            form.reset();
+            document.querySelectorAll('.input-field').forEach(input => {
+              input.classList.remove('valid');
+            });
+            passwordStrength.classList.add('hidden');
+
+            // Reset button
+            submitBtn.innerHTML = '<span class="mr-2">Create Account</span><i class="fas fa-arrow-right"></i>';
+            submitBtn.disabled = false;
+          }, 1500);
+        }
+      });
+
+      // Close modal
+      closeModalBtn.addEventListener('click', function() {
+        successModal.querySelector('div').classList.remove('scale-100');
+        successModal.querySelector('div').classList.add('scale-95');
+        setTimeout(() => {
+          successModal.classList.add('hidden');
+        }, 300);
+      });
+
+      // Add some animation to form inputs on focus
+      document.querySelectorAll('.input-field').forEach(input => {
+        input.addEventListener('focus', function() {
+          this.parentElement.classList.add('transform', 'scale-105');
+          this.parentElement.style.zIndex = "10";
+          this.parentElement.style.transition = "transform 0.3s ease";
+        });
+
+        input.addEventListener('blur', function() {
+          this.parentElement.classList.remove('transform', 'scale-105');
+          this.parentElement.style.zIndex = "1";
+        });
+      });
+    });
+  </script>
+</body>
+</html>

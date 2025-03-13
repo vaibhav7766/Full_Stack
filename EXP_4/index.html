@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Form with Input Validation</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg shadow-md p-8 w-full max-w-md">
+        <h1 class="text-2xl font-bold text-center mb-6 text-blue-600">Secure Information Form</h1>
+
+        <!-- Password Section -->
+        <div id="passwordSection" class="mb-6">
+            <h2 class="text-lg font-semibold mb-3 text-gray-700">Enter Password to Access Form</h2>
+            <div class="relative">
+                <input type="password" id="accessPassword" placeholder="Enter password"
+                       class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button id="unlockButton"
+                        class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                    Unlock Form
+                </button>
+            </div>
+            <p id="passwordError" class="text-red-500 mt-2 hidden">Incorrect password. Please try again.</p>
+        </div>
+
+        <!-- Form Section -->
+        <div id="formSection" class="hidden">
+            <form id="userForm">
+                <div class="mb-4">
+                    <label for="mobileNumber" class="block text-gray-700 font-medium mb-2">Mobile Number</label>
+                    <input type="text" id="mobileNumber" placeholder="Enter 10 digit mobile number"
+                           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" maxlength="10">
+                </div>
+
+                <div class="mb-6">
+                    <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email (e.g. user@example.com)"
+                           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <button type="submit"
+                        class="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+                    Submit Information
+                </button>
+            </form>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="hidden text-center py-4">
+            <svg class="w-16 h-16 text-green-500 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <h2 class="text-xl font-bold text-gray-800 mb-2">Success!</h2>
+            <p class="text-gray-600">Your information has been submitted successfully.</p>
+            <button id="resetButton"
+                    class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                Submit Another Response
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Password for accessing the form
+        const correctPassword = "password123"; // You can change this
+
+        // Elements
+        const passwordSection = document.getElementById('passwordSection');
+        const formSection = document.getElementById('formSection');
+        const successMessage = document.getElementById('successMessage');
+        const unlockButton = document.getElementById('unlockButton');
+        const passwordError = document.getElementById('passwordError');
+        const userForm = document.getElementById('userForm');
+        const resetButton = document.getElementById('resetButton');
+
+        // Password validation
+        unlockButton.addEventListener('click', function() {
+            const enteredPassword = document.getElementById('accessPassword').value;
+
+            if (enteredPassword === correctPassword) {
+                passwordSection.classList.add('hidden');
+                formSection.classList.remove('hidden');
+                passwordError.classList.add('hidden');
+            } else {
+                passwordError.classList.remove('hidden');
+                document.getElementById('accessPassword').value = '';
+            }
+        });
+
+        // Form submission
+        userForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const mobileNumber = document.getElementById('mobileNumber').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            // Regular expression to validate mobile number (10 digits)
+            var mobileRegex = /^\d{10}$/;
+
+            // Check mobile number format
+            if (!mobileRegex.test(mobileNumber)) {
+                alert("Mobile number is not correct.");
+                return;
+            }
+
+            // Regular expression to validate email
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // Check email format
+            if (!emailRegex.test(email)) {
+                alert("Email is not correct.\nEmail must be in the format: user@example.com");
+                return;
+            }
+
+            // Confirm submission
+            if (confirm("Do you want to submit this information?")) {
+                // Display success message
+                formSection.classList.add('hidden');
+                successMessage.classList.remove('hidden');
+            }
+        });
+
+        // Reset button
+        resetButton.addEventListener('click', function() {
+            // Reset form fields
+            document.getElementById('mobileNumber').value = '';
+            document.getElementById('email').value = '';
+
+            // Show form again
+            successMessage.classList.add('hidden');
+            formSection.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
